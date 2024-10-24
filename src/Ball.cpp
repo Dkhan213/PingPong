@@ -2,9 +2,9 @@
 
 Ball::Ball(float x, const int windowHeight, const float baseBallVelocity) : windowHeight(windowHeight) {
 	ball.setRadius(10);
-	ball.setPosition(x, windowHeight / 2 - 50);
+	ball.setPosition(x, 0);
 	ball.setFillColor(sf::Color::White);
-	dx = baseBallVelocity;
+	dx = -baseBallVelocity;
 	dy = baseBallVelocity;
 }
 
@@ -12,10 +12,12 @@ const sf::CircleShape& Ball::get() const {
 	return ball;
 }
 
-void Ball::move() {
-	ball.move(dx, dy);
+void Ball::move(float dt) {
+	ball.move(dx * dt, dy * dt);
+	//std::cout << dt << std::endl;
 }
 void Ball::collisionDetection(Paddle& leftPaddle, Paddle& rightPaddle) {
+
 	if (ball.getGlobalBounds().intersects(leftPaddle.get().getGlobalBounds()) ||
 		ball.getGlobalBounds().intersects(rightPaddle.get().getGlobalBounds())) {
 		dx = -dx;

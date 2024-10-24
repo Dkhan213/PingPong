@@ -1,4 +1,4 @@
-﻿  Main.cpp
-C:\Users\User2\Projects\PingPong\Main.cpp(16,30): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
-C:\Users\User2\Projects\PingPong\Main.cpp(40,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+﻿  Ball.cpp
+C:\Users\User2\Projects\PingPong\src\Ball.cpp(7,7): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\User2\Projects\PingPong\src\Ball.cpp(8,7): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
   PingPong.vcxproj -> C:\Users\User2\Projects\PingPong\bin\Win32\Debug\PingPong.exe

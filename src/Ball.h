@@ -15,7 +15,7 @@ public:
 
 	const sf::CircleShape& get() const;
 
-	void move();
+	void move(float dt);
 
 	void collisionDetection(Paddle& leftPaddle, Paddle& rightPaddle);
 };

@@ -5,15 +5,16 @@
 
 const int windowWidth = 800;
 const int windowHeight = 600;
-const float basePaddleSpeed = 15.0f; // Base speed
-const float targetFPS = 60.0f; // Target FPS for scaling
-const float baseBallVelocity = 4.0f;
-
+const float basePaddleSpeed = 450.0f;
+const float targetFPS = 80.0f; // Target FPS for scaling
+const float baseBallVelocity = 300.0f;
 
 int main() {
+
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Window");
 
     window.setFramerateLimit(targetFPS); // Set FPS Limit
+    window.setVerticalSyncEnabled(true);
 
     Paddle leftPaddle(10, windowHeight / 2 - 50, windowHeight); // Create left paddle object
     Paddle rightPaddle(windowWidth - 20, windowHeight / 2 - 50, windowHeight); //Create right paddle object
@@ -23,8 +24,10 @@ int main() {
     int frameCount = 0; // Frame counter
     float fps = 0.0f; // FPS value
 
+    sf::Clock clock;
+    sf::Time time;
+    float dt = 0;
 
-    const sf::Clock clock;
     // Game loop
     while (window.isOpen())
     {
@@ -43,11 +46,7 @@ int main() {
             //std::cout << "FPS: " << fps << std::endl; // Print FPS to console
         }
 
-        float paddleSpeed;
-        if (clock.getElapsedTime().asSeconds() >= 1.0f)
-            paddleSpeed = basePaddleSpeed * (targetFPS / fps);
-        else paddleSpeed = basePaddleSpeed;
-        
+        float paddleSpeed = basePaddleSpeed * dt;
         //std::cout << paddleSpeed << std::endl;
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -67,9 +66,11 @@ int main() {
                 rightPaddle.move(paddleSpeed, windowHeight);
             }
 
-            if (clock.getElapsedTime().asSeconds() >= 3.0f)
-                ball.move();
+            ball.move(dt);
             ball.collisionDetection(leftPaddle, rightPaddle);
+
+            time = clock.restart();
+            dt = time.asSeconds();
 
         // Clear and draw
         window.clear();
