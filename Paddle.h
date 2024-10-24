@@ -1,30 +1,22 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <IoStream>
+#include <iostream>
 
-class Paddle
-{
+class Paddle {
+
 private:
     sf::RectangleShape paddle;
+    const int windowHeight;
+
 public:
-    Paddle(float x, float y)
-    {
-        paddle.setSize(sf::Vector2f(10, 100));
-        paddle.setPosition(x, y);
-        paddle.setFillColor(sf::Color::White);
-    }
+    // Constructor
+    Paddle(float x, float y, int windowHeight);
 
-    const sf::RectangleShape& get() const
-    {
-        return paddle;
-    };
+    // Getter for the paddle shape
+    const sf::RectangleShape& get() const;
 
-    void move(float dy, int windowHeight)
-    {
-        //std::cout << paddle.getPosition().y << std::endl;
-        paddle.move(0, dy);
-        if (paddle.getPosition().y < 0 || paddle.getPosition().y > windowHeight - paddle.getSize().y)
-            paddle.move(0, -dy);
-    }
+    // Method to move the paddle
+    void move(float dy, int windowHeight);
+
+    void Paddle::setWindowHeight(int windowHeight);
 };
-
